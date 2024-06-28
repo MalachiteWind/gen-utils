@@ -5,9 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gen-utils"
 dynamic = ["version"]
+dependencies = [
+    "numpy"
+]
+
 
 [tool.setuptools]
 packages=["gen_utils"]
 
 [tool.setuptools_scm]
-

@@ -1,4 +1,5 @@
 import time
+import numpy as np
 
 def add_clock(f):
     """
@@ -37,3 +38,37 @@ def add_clock(f):
         return result
     
     return clocked_f
+
+def mesh_func(f):
+    """
+    vectorize a function in a stupid way.
+    """
+    def _np_or_list(var):
+        if isinstance(var,np.ndarray) or isinstance(var,list):
+            return True
+        return False
+    
+    def _shape(arg):
+        if _np_or_list(arg):
+            return len(arg)
+        return 1
+
+    def _mesh_f_shape(*args):
+        return tuple([_shape(arg_i) for arg_i in args])
+
+    def _mesh_f(*args):
+        mesh_args = np.meshgrid(*args)
+        mesh_args = [arr.reshape(-1) for arr in mesh_args]
+        
+        sol = []
+        for arg_i in zip(*mesh_args):
+            sol.append(f(*arg_i))
+        return np.array(sol).reshape(_mesh_f_shape(*args))
+    
+    def wrapper(*args):
+        elements = [_np_or_list(arg) for arg in args]
+        if True in elements:
+            return _mesh_f(*args)
+        return f(*args)
+    
+    return wrapper
