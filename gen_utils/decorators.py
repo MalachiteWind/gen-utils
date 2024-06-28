@@ -1,6 +1,24 @@
 import time
 
 def add_clock(f):
+    """
+    Decorator to print the name and time taken to compute a function.
+
+    Example:
+    --------
+    >>> import time
+    >>> from gen_util.decorators import add_clock
+
+    >>> @add_clock
+    >>> def f(x):
+    ...     time.sleep(1)
+    ...     return x
+
+    >>> f(1)
+    'apply f: [1.0000s]'
+    1
+    """
+
     def _remove_underscore(name):
         return name.replace('_',' ')
 
