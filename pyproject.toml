@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=62", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gen-utils"
+dynamic = ["version"]
+
+[tool.setuptools]
+packages=["gen_utils"]
+
+[tool.setuptools_scm]
+
