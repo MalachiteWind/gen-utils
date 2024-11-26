@@ -42,6 +42,7 @@ def add_clock(f):
 def mesh_func(f):
     """
     vectorize a function in a stupid way.
+    
     """
     def _np_or_list(var):
         if isinstance(var,np.ndarray) or isinstance(var,list):
